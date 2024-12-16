@@ -4,7 +4,7 @@ import AppCard from './AppCard';
 import AppButton from './AppButtons';
 
 function AppMain() {
-    const [activeCard, setIsShown] = useState(1);
+    const [activeCard, setIsShown] = useState(null);
 
     return (
         <main className="main">
@@ -16,11 +16,12 @@ function AppMain() {
                     colorClass={(activeCard === curLanguage.id) ? "btn-warning" : "btn-primary"}
                     onToggle={() => setIsShown(curLanguage.id)} />)}
                 {/* Cards */}
-                {languages.map(curLanguage => (activeCard === curLanguage.id) && <AppCard
+                {!activeCard ? <div className='card mt-4 p-2'>Nessun linguaggio selezionato</div> :
+                (languages.map(curLanguage => (activeCard === curLanguage.id) && <AppCard
                     key={curLanguage.id}
                     title={curLanguage.title}
                     description={curLanguage.description} />
-                )}
+                ))}
             </div>
         </main>
     )
